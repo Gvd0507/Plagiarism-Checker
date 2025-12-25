@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -34,7 +32,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -43,9 +41,12 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
@@ -53,6 +54,7 @@ header {
     margin-bottom: 4rem;
     padding: 3rem 0 2rem;
     position: relative;
+    width: 100%;
 }
 
 .theme-toggle {
@@ -157,18 +159,79 @@ h1 {
 }
 
 h2 {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
     color: var(--text);
+    text-align: center;
 }
 
 .upload-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 3rem;
+    padding: 0 1rem;
+    min-height: 50vh;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.upload-text-section {
+    flex: 0 0 15%;
+    padding-right: 1rem;
+    min-width: 180px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.upload-text-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.upload-text-section .upload-description {
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.upload-card-single {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    flex: 1;
+    min-width: 0;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.upload-card-single:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+.upload-description {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.upload-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0 2rem;
+    min-height: 35vh;
+    width: 100%;
 }
 
 .upload-card {
@@ -198,12 +261,14 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3rem 2rem;
+    padding: 3.5rem 12rem;
     border: 2px dashed var(--border);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     background: var(--bg);
+    min-height: 180px;
+    width: 100%;
 }
 
 .file-label:hover {
@@ -212,31 +277,27 @@ h2 {
 }
 
 .upload-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
     filter: grayscale(0.3);
 }
 
 .upload-text {
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 500;
     color: var(--text);
 }
 
 .file-name {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    min-height: 1.5rem;
-    word-break: break-word;
+    display: none;
 }
 
 .analyze-btn {
     display: block;
-    width: 100%;
-    max-width: 400px;
+    width: auto;
+    max-width: 250px;
     margin: 0 auto 4rem;
-    padding: 1.2rem 3rem;
+    padding: 1.2rem 2.5rem;
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--secondary);
@@ -294,18 +355,22 @@ h2 {
 .result-card {
     background: var(--card-bg);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     box-shadow: 0 2px 12px var(--shadow);
     border: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    gap: 2rem;
     transition: all 0.3s ease;
 }
 
 .result-card:hover {
     box-shadow: 0 4px 16px var(--shadow);
+}
+
+.result-info {
+    text-align: left;
 }
 
 .result-info h3 {
@@ -314,6 +379,7 @@ h2 {
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
     color: var(--text);
+    text-align: left;
 }
 
 .result-details {
@@ -392,7 +458,26 @@ footer {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
+    .upload-section {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .upload-text-section {
+        flex: 1;
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .upload-text-section h2 {
+        text-align: center;
+    }
+    
+    .upload-text-section .upload-description {
+        text-align: center;
+    }
+    
     .container {
         padding: 1rem;
     }
@@ -404,6 +489,15 @@ footer {
     .subtitle {
         font-size: 1rem;
     }
+
+    .upload-section {
+        padding: 0 0.5rem;
+        min-height: 30vh;
+    }
+
+    .upload-card-single {
+        padding: 2rem 1.5rem;
+    }}
 
     .upload-section {
         grid-template-columns: 1fr;
@@ -439,7 +533,7 @@ footer {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1400px) {
     h1 {
         font-size: 1.75rem;
     }
@@ -474,4 +568,77 @@ footer {
     to {
         transform: rotate(360deg);
     }
+}
+
+/* Similarity Matrix Styles */
+.matrix-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.similarity-matrix {
+    border-collapse: collapse;
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px var(--shadow);
+}
+
+.similarity-matrix th,
+.similarity-matrix td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.similarity-matrix th {
+    background: var(--primary);
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.similarity-matrix td {
+    background: var(--card-bg);
+}
+
+.similarity-matrix .file-header {
+    background: var(--bg);
+    font-weight: 600;
+    text-align: left;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.similarity-cell {
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.similarity-cell:hover {
+    transform: scale(1.05);
+}
+
+.similarity-self {
+    background: var(--border);
+    color: var(--text-light);
+}
+
+.similarity-high {
+    background: rgba(244, 67, 54, 0.15);
+    color: var(--danger);
+}
+
+.similarity-medium {
+    background: rgba(255, 152, 0, 0.15);
+    color: var(--warning);
+}
+
+.similarity-low {
+    background: rgba(0, 183, 79, 0.15);
+    color: var(--success);
 }

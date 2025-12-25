@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plagiarism Detector</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -18,40 +20,29 @@
                 </span>
             </label>
             <h1>Plagiarism Detector</h1>
-            <p class="subtitle">Upload files to analyze similarity</p>
+            <p class="subtitle">Upload the files to check for plagiarism</p>
         </header>
 
         <main>
             <section class="upload-section">
-                <div class="upload-card">
-                    <h2>Reference Document</h2>
+                <div class="upload-card-single">
                     <div class="file-input-wrapper">
-                        <input type="file" id="referenceFile" accept=".txt" class="file-input">
-                        <label for="referenceFile" class="file-label">
-                            <span class="upload-icon">📄</span>
-                            <span class="upload-text">Choose reference file</span>
-                        </label>
-                        <div class="file-name" id="referenceName"></div>
-                    </div>
-                </div>
-
-                <div class="upload-card">
-                    <h2>Documents to Check</h2>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="studentFiles" accept=".txt" multiple class="file-input">
-                        <label for="studentFiles" class="file-label">
+                        <input type="file" id="documentFiles" accept=".txt,.pdf,.docx" multiple class="file-input">
+                        <label for="documentFiles" class="file-label">
                             <span class="upload-icon">📁</span>
-                            <span class="upload-text">Choose files to analyze</span>
+                            <span class="upload-text">Choose files (.txt, .pdf, .docx)</span>
                         </label>
-                        <div class="file-name" id="studentNames"></div>
+                        <div class="file-name" id="documentNames"></div>
                     </div>
                 </div>
             </section>
 
-            <button id="analyzeBtn" class="analyze-btn" disabled>Analyze Plagiarism</button>
+            <button id="analyzeBtn" class="analyze-btn" disabled>Check Plagiarism</button>
 
             <section class="results-section" id="resultsSection">
-                <h2>Analysis Results</h2>
+                <h2>Similarity Matrix</h2>
+                <div id="matrixContainer" class="matrix-container"></div>
+                <h2 style="margin-top: 3rem;">Individual Results</h2>
                 <div id="resultsContainer"></div>
             </section>
         </main>
