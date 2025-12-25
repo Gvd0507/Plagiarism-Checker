@@ -642,3 +642,148 @@ footer {
     background: rgba(0, 183, 79, 0.15);
     color: var(--success);
 }
+
+/* Uploaded Files List Styles */
+.uploaded-files-list {
+    display: none;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 2px solid var(--success);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.files-success-message {
+    color: var(--success);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    animation: fadeInUp 0.4s ease-out backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.file-item:hover {
+    background: var(--card-bg);
+    transform: translateX(4px);
+    border-color: var(--primary);
+}
+
+.file-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.file-name-text {
+    flex: 1;
+    color: var(--text);
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-size {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* Error Message Styles */
+.error-message {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(210, 15, 57, 0.1);
+    border: 2px solid var(--danger);
+    border-radius: 8px;
+    color: var(--danger);
+    font-weight: 600;
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Remove File Button */
+.remove-file-btn {
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin-left: auto;
+}
+
+.remove-file-btn:hover {
+    background: var(--danger);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Clear Files Button */
+.clear-files-btn {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.clear-files-btn:hover {
+    background: #a00c2d;
+    transform: scale(1.05);
+}

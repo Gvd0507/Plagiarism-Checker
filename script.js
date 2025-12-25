@@ -78,11 +78,16 @@ class PlagiarismDetector {
             for (let i = 1; i <= pdf.numPages; i++) {
                 const page = await pdf.getPage(i);
                 const textContent = await page.getTextContent();
-                const pageText = textContent.items.map(item => item.str).join(' ');
+                // Better text extraction with proper spacing
+                const pageText = textContent.items
+                    .map(item => item.str.trim())
+                    .filter(str => str.length > 0)
+                    .join(' ');
                 fullText += pageText + ' ';
             }
             
-            return fullText;
+            // Normalize whitespace
+            return fullText.replace(/\s+/g, ' ').trim();
         } catch (error) {
             console.error('Error reading PDF:', error);
             throw new Error('Failed to read PDF file');
@@ -94,7 +99,8 @@ class PlagiarismDetector {
         try {
             const arrayBuffer = await file.arrayBuffer();
             const result = await mammoth.extractRawText({ arrayBuffer });
-            return result.value;
+            // Normalize whitespace to match PDF processing
+            return result.value.replace(/\s+/g, ' ').trim();
         } catch (error) {
             console.error('Error reading DOCX:', error);
             throw new Error('Failed to read DOCX file');
@@ -103,8 +109,18 @@ class PlagiarismDetector {
 
     // Process text: lowercase and remove punctuation
     processText(text) {
-        const cleanedText = text.toLowerCase().replace(/[^a-z ]/g, '');
-        const words = cleanedText.split(/\s+/).filter(word => word.length > 0);
+        // Remove all non-alphabetic characters and extra whitespace
+        const cleanedText = text
+            .toLowerCase()
+            .replace(/[^a-z\s]/g, ' ')  // Replace non-letters with spaces
+            .replace(/\s+/g, ' ')        // Normalize all whitespace to single space
+            .trim();
+        
+        // Split into words and filter out very short words (often artifacts)
+        const words = cleanedText
+            .split(' ')
+            .filter(word => word.length > 2);  // Filter words shorter than 3 characters
+        
         return words;
     }
 
@@ -119,22 +135,109 @@ class PlagiarismDetector {
     }
 
     handleDocumentUpload(event) {
-        const files = Array.from(event.target.files);
-        if (files.length >= 2) {
-            this.documentFiles = files;
-            const fileNames = files.map(f => f.name).join(', ');
-            this.documentNames.textContent = `✓ ${files.length} files selected`;
+        const newFiles = Array.from(event.target.files);
+        const uploadedFilesList = document.getElementById('uploadedFilesList');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Add new files to existing ones (avoid duplicates)
+        newFiles.forEach(newFile => {
+            const isDuplicate = this.documentFiles.some(existingFile => 
+                existingFile.name === newFile.name && existingFile.size === newFile.size
+            );
+            if (!isDuplicate) {
+                this.documentFiles.push(newFile);
+            }
+        });
+        
+        // Clear file input to allow selecting the same file again if needed
+        event.target.value = '';
+        
+        // Hide error message
+        errorMessage.style.display = 'none';
+        
+        // Update UI
+        this.documentNames.textContent = `✓ ${this.documentFiles.length} file(s) selected`;
+        
+        if (this.documentFiles.length >= 2) {
             this.analyzeBtn.disabled = false;
         } else {
-            this.documentNames.textContent = 'Please select at least 2 files';
             this.analyzeBtn.disabled = true;
         }
+        
+        // Display uploaded files list
+        if (this.documentFiles.length > 0) {
+            let filesHTML = '<div class="files-success-message">✓ Files uploaded successfully!</div>';
+            filesHTML += '<button id="clearFilesBtn" class="clear-files-btn">Clear All Files</button>';
+            filesHTML += '<ul class="file-list">';
+            this.documentFiles.forEach((file, index) => {
+                filesHTML += `
+                    <li class="file-item" style="animation-delay: ${index * 0.1}s">
+                        <span class="file-icon">📄</span>
+                        <span class="file-name-text">${file.name}</span>
+                        <button class="remove-file-btn" data-index="${index}">✕</button>
+                    </li>
+                `;
+            });
+            filesHTML += '</ul>';
+            uploadedFilesList.innerHTML = filesHTML;
+            uploadedFilesList.style.display = 'block';
+            
+            // Add event listeners for remove buttons
+            document.querySelectorAll('.remove-file-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => this.removeFile(parseInt(e.target.dataset.index)));
+            });
+            
+            // Add event listener for clear all button
+            const clearBtn = document.getElementById('clearFilesBtn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => this.clearAllFiles());
+            }
+        }
+    }
+    
+    removeFile(index) {
+        this.documentFiles.splice(index, 1);
+        // Trigger UI update by creating a fake event
+        this.handleDocumentUpload({ target: { files: [], value: '' } });
+        
+        if (this.documentFiles.length === 0) {
+            document.getElementById('uploadedFilesList').style.display = 'none';
+            this.documentNames.textContent = '';
+        }
+    }
+    
+    clearAllFiles() {
+        this.documentFiles = [];
+        document.getElementById('uploadedFilesList').style.display = 'none';
+        this.documentNames.textContent = '';
+        this.analyzeBtn.disabled = true;
+        document.getElementById('errorMessage').style.display = 'none';
+    }
+    
+    formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
     }
 
     async analyzePlagiarism() {
+        const errorMessage = document.getElementById('errorMessage');
+        
         if (this.documentFiles.length < 2) {
-            alert('Please upload at least 2 files');
+            errorMessage.textContent = '⚠️ Please select at least 2 files before checking for plagiarism';
+            errorMessage.style.display = 'block';
             return;
+        }
+        
+        // Hide error message
+        errorMessage.style.display = 'none';
+
+        // Hide uploaded files list
+        const uploadedFilesList = document.getElementById('uploadedFilesList');
+        if (uploadedFilesList) {
+            uploadedFilesList.style.display = 'none';
         }
 
         // Show loading state
@@ -178,14 +281,17 @@ class PlagiarismDetector {
             // Display results
             this.displayMatrix(matrix, processedFiles);
             this.displayResults(results);
+            
+            // Clear files after analysis
+            this.clearAllFiles();
 
         } catch (error) {
             alert('Error analyzing files: ' + error.message);
             console.error(error);
         } finally {
             // Reset button
-            this.analyzeBtn.disabled = false;
-            this.analyzeBtn.textContent = 'Analyze Plagiarism';
+            this.analyzeBtn.disabled = true;
+            this.analyzeBtn.textContent = 'Check Plagiarism';
         }
     }
 
