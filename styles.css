@@ -59,7 +59,7 @@ header {
 
 .github-link {
     position: fixed;
-    top: 2rem;
+    top: 1rem;
     right: 7.5rem;
     width: 40px;
     height: 40px;
@@ -89,7 +89,7 @@ header {
 
 .theme-toggle {
     position: fixed;
-    top: 2rem;
+    top: 1rem;
     right: 2rem;
     width: 70px;
     height: 36px;
@@ -845,7 +845,7 @@ footer {
     /* Make fixed icons relative on mobile */
     .github-link {
         position: fixed;
-        top: 1rem;
+        top: 0.75rem;
         right: 5rem;
         width: 36px;
         height: 36px;
@@ -858,7 +858,7 @@ footer {
     
     .theme-toggle {
         position: fixed;
-        top: 1rem;
+        top: 0.75rem;
         right: 1rem;
         width: 60px;
         height: 32px;
