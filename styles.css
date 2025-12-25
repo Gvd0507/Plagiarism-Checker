@@ -57,6 +57,36 @@ header {
     width: 100%;
 }
 
+.github-link {
+    position: fixed;
+    top: 2rem;
+    right: 7.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: var(--text);
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.github-link:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.github-icon {
+    width: 24px;
+    height: 24px;
+}
+
 .theme-toggle {
     position: fixed;
     top: 2rem;
@@ -126,6 +156,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: none;
 }
 
 .sun-emoji {
@@ -142,6 +173,7 @@ header {
 
 .toggle-input:checked + .toggle-track .moon-emoji {
     opacity: 1;
+    filter: brightness(0) saturate(100%) invert(94%) sepia(7%) saturate(230%) hue-rotate(189deg) brightness(103%) contrast(94%);
 }
 
 h1 {
