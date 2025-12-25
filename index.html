@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Detector</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <label class="theme-toggle" for="themeToggle">
+                <input type="checkbox" id="themeToggle" class="toggle-input">
+                <span class="toggle-track">
+                    <img src="favicon/lmode.svg" alt="Light mode" class="toggle-icon sun-emoji">
+                    <img src="favicon/dmode.svg" alt="Dark mode" class="toggle-icon moon-emoji">
+                    <span class="toggle-thumb"></span>
+                </span>
+            </label>
+            <h1>Plagiarism Detector</h1>
+            <p class="subtitle">Upload files to analyze similarity</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-card">
+                    <h2>Reference Document</h2>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="referenceFile" accept=".txt" class="file-input">
+                        <label for="referenceFile" class="file-label">
+                            <span class="upload-icon">📄</span>
+                            <span class="upload-text">Choose reference file</span>
+                        </label>
+                        <div class="file-name" id="referenceName"></div>
+                    </div>
+                </div>
+
+                <div class="upload-card">
+                    <h2>Documents to Check</h2>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="studentFiles" accept=".txt" multiple class="file-input">
+                        <label for="studentFiles" class="file-label">
+                            <span class="upload-icon">📁</span>
+                            <span class="upload-text">Choose files to analyze</span>
+                        </label>
+                        <div class="file-name" id="studentNames"></div>
+                    </div>
+                </div>
+            </section>
+
+            <button id="analyzeBtn" class="analyze-btn" disabled>Analyze Plagiarism</button>
+
+            <section class="results-section" id="resultsSection">
+                <h2>Analysis Results</h2>
+                <div id="resultsContainer"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Powered by Jaccard Similarity Algorithm</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
