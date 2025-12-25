@@ -529,7 +529,7 @@ footer {
 
     .upload-card-single {
         padding: 2rem 1.5rem;
-    }}
+    }
 
     .upload-section {
         grid-template-columns: 1fr;
@@ -818,4 +818,271 @@ footer {
 .clear-files-btn:hover {
     background: #a00c2d;
     transform: scale(1.05);
+}
+
+/* Tablet and Mobile Responsive Styles */
+@media (max-width: 1024px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .github-link {
+        right: 6.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        max-width: 100%;
+    }
+    
+    header {
+        margin-bottom: 2rem;
+        padding: 2rem 0 1.5rem;
+    }
+    
+    /* Make fixed icons relative on mobile */
+    .github-link {
+        position: absolute;
+        top: 1rem;
+        right: 5rem;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .github-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 60px;
+        height: 32px;
+    }
+    
+    .toggle-thumb {
+        height: 24px;
+        width: 24px;
+    }
+    
+    .toggle-input:checked + .toggle-track .toggle-thumb {
+        transform: translateX(28px);
+    }
+    
+    h1 {
+        font-size: 2.25rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .upload-section {
+        padding: 0 0.75rem;
+        min-height: auto;
+    }
+    
+    .file-label {
+        padding: 1.5rem;
+        min-height: 150px;
+    }
+    
+    .upload-icon {
+        font-size: 2.5rem;
+    }
+    
+    .upload-text {
+        font-size: 1rem;
+    }
+    
+    .analyze-btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .result-card {
+        padding: 1.25rem;
+    }
+    
+    .similarity-matrix {
+        font-size: 0.85rem;
+    }
+    
+    .similarity-matrix th,
+    .similarity-matrix td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.75rem;
+    }
+    
+    header {
+        padding: 1.5rem 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .github-link {
+        width: 32px;
+        height: 32px;
+        right: 4.5rem;
+    }
+    
+    .github-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .theme-toggle {
+        width: 54px;
+        height: 28px;
+    }
+    
+    .toggle-thumb {
+        height: 22px;
+        width: 22px;
+    }
+    
+    .toggle-input:checked + .toggle-track .toggle-thumb {
+        transform: translateX(26px);
+    }
+    
+    .toggle-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .upload-section {
+        padding: 0 0.5rem;
+        min-height: auto;
+        margin-bottom: 1.5rem;
+    }
+    
+    .file-label {
+        padding: 1.25rem 1rem;
+        min-height: 130px;
+    }
+    
+    .upload-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .upload-text {
+        font-size: 0.9rem;
+    }
+    
+    .file-name {
+        font-size: 0.85rem;
+    }
+    
+    .analyze-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .uploaded-files-list {
+        padding: 1rem;
+    }
+    
+    .files-success-message {
+        font-size: 1rem;
+    }
+    
+    .file-item {
+        padding: 0.625rem 0.75rem;
+        gap: 0.5rem;
+    }
+    
+    .file-icon {
+        font-size: 1.25rem;
+    }
+    
+    .file-name-text {
+        font-size: 0.875rem;
+    }
+    
+    .error-message {
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .matrix-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .similarity-matrix {
+        font-size: 0.75rem;
+        min-width: 100%;
+    }
+    
+    .similarity-matrix th,
+    .similarity-matrix td {
+        padding: 0.4rem;
+        min-width: 60px;
+    }
+    
+    .result-card {
+        padding: 1rem;
+    }
+    
+    .result-info h3 {
+        font-size: 1rem;
+    }
+    
+    .result-details {
+        font-size: 0.85rem;
+    }
+    
+    .percentage-value {
+        font-size: 1.75rem;
+    }
+    
+    .percentage-label {
+        font-size: 0.85rem;
+    }
+    
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .file-label {
+        padding: 1rem 0.75rem;
+        min-height: 110px;
+    }
+    
+    .upload-icon {
+        font-size: 1.75rem;
+    }
+    
+    .similarity-matrix th,
+    .similarity-matrix td {
+        padding: 0.3rem;
+        min-width: 50px;
+        font-size: 0.7rem;
+    }
 }
