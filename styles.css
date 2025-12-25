@@ -52,9 +52,24 @@ body {
 header {
     text-align: center;
     margin-bottom: 4rem;
-    padding: 3rem 0 2rem;
+    padding: 4rem 0 2rem;
     position: relative;
     width: 100%;
+}
+
+.site-logo {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.site-logo:hover {
+    transform: translateX(-50%) scale(1.05);
 }
 
 .github-link {
@@ -839,7 +854,13 @@ footer {
     
     header {
         margin-bottom: 2rem;
-        padding: 2rem 0 1.5rem;
+        padding: 2.5rem 0 1.5rem;
+    }
+    
+    .site-logo {
+        width: 40px;
+        height: 40px;
+        top: 0.75rem;
     }
     
     /* Make fixed icons relative on mobile */
@@ -926,8 +947,14 @@ footer {
     }
     
     header {
-        padding: 1.5rem 0 1rem;
+        padding: 2rem 0 1rem;
         margin-bottom: 1.5rem;
+    }
+    
+    .site-logo {
+        width: 36px;
+        height: 36px;
+        top: 0.75rem;
     }
     
     .github-link {

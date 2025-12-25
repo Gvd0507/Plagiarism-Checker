@@ -24,6 +24,8 @@ class PlagiarismDetector {
         if (toggle) {
             toggle.checked = savedTheme === 'dark';
         }
+        // Set initial logos based on saved theme
+        setTimeout(() => this.updateLogos(savedTheme), 0);
     }
 
     init() {
@@ -439,6 +441,22 @@ class PlagiarismDetector {
         
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+        
+        // Update logo and favicon based on theme
+        this.updateLogos(newTheme);
+    }
+    
+    updateLogos(theme) {
+        const siteLogo = document.getElementById('siteLogo');
+        const favicon = document.getElementById('favicon');
+        
+        if (theme === 'dark') {
+            siteLogo.src = 'favicon/dlogo.svg';
+            favicon.href = 'favicon/dlogo.svg';
+        } else {
+            siteLogo.src = 'favicon/llogo.svg';
+            favicon.href = 'favicon/llogo.svg';
+        }
     }
 }
 
