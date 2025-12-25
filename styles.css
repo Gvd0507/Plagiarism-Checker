@@ -844,7 +844,7 @@ footer {
     
     /* Make fixed icons relative on mobile */
     .github-link {
-        position: absolute;
+        position: fixed;
         top: 1rem;
         right: 5rem;
         width: 36px;
@@ -857,6 +857,7 @@ footer {
     }
     
     .theme-toggle {
+        position: fixed;
         top: 1rem;
         right: 1rem;
         width: 60px;
